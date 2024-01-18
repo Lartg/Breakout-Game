@@ -1,6 +1,6 @@
 const canvas = document.getElementById("myCanvas");
 const ctx = canvas.getContext("2d");
-
+// should use classes?
 // ball definition
 let x = canvas.width / 2;
 let y = canvas.height - 30;
@@ -14,6 +14,23 @@ const paddleWidth = 75;
 let paddleX = (canvas.width - paddleWidth) / 2;
 let rightPressed = false;
 let leftPressed = false;
+
+// brick definition
+const brickRowCount = 3;
+const brickColumnCount = 5;
+const brickWidth = 75;
+const brickHeight = 20;
+const brickPadding = 10;
+const brickOffsetTop = 30;
+const brickOffsetLeft = 30;
+
+const bricks = [];
+for (let c = 0; c < brickColumnCount; c++) {
+  bricks[c] = [];
+  for (let r = 0; r < brickRowCount; r++) {
+    bricks[c][r] = { x: 0, y: 0 };
+  }
+}
 
 function drawBall() {
   ctx.beginPath();
@@ -31,13 +48,31 @@ function drawPaddle() {
   ctx.closePath();
 }
 
+function drawBricks() {
+  for (let c = 0; c < brickColumnCount; c++) {
+    for (let r = 0; r < brickRowCount; r++) {
+      const brickX = c * (brickWidth + brickPadding) + brickOffsetLeft;
+      const brickY = r * (brickHeight + brickPadding) + brickOffsetTop;
+      bricks[c][r].x = brickX;
+      bricks[c][r].y = brickY;
+      ctx.beginPath();
+      ctx.rect(brickX, brickY, brickWidth, brickHeight);
+      ctx.fillStyle = "#0095DD";
+      ctx.fill();
+      ctx.closePath();
+    }
+  }
+}
+
+
 function draw() {
   // reset canvas
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  // draw ball
+  // draw game elements
   drawBall();
   drawPaddle();
+  drawBricks();
   // ball collisions
   if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
     dx = -dx;
