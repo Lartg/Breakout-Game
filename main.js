@@ -38,13 +38,22 @@ function draw() {
   // draw ball
   drawBall();
   drawPaddle();
-  // ball and canvas border collision 
+  // ball collisions
   if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
     dx = -dx;
   }
-  if (y + dy > canvas.height - ballRadius || y + dy < ballRadius) {
+  if (y + dy < ballRadius) {
     dy = -dy;
+  } else if (y + dy > canvas.height - ballRadius) {
+    if (x > paddleX && x < paddleX + paddleWidth) {
+      dy = -dy;
+    } else {
+      alert("GAME OVER");
+      document.location.reload();
+      clearInterval(interval);
+    }
   }
+  
   // paddle movement
   if (rightPressed) {
     paddleX += 7;
@@ -83,4 +92,4 @@ function keyUpHandler(e) {
   }
 }
 
-setInterval(draw, 10);
+const interval = setInterval(draw, 10);
