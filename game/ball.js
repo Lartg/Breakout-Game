@@ -1,4 +1,4 @@
-import Sprite from './sprite.js'
+import Sprite from './sprite.js' // eslint-disable-line
 
 class Ball extends Sprite {
   constructor(x = 0, y = 0, radius = 10, color = '#0095DD') {

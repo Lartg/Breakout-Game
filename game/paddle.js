@@ -1,4 +1,4 @@
-import Sprite from './sprite.js'
+import Sprite from './sprite.js' // eslint-disable-line
 
 class Paddle extends Sprite {
   constructor(x, height = 10, width = 75, color = '#0095DD') {

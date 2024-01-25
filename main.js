@@ -1,9 +1,9 @@
 /* eslint-disable no-alert */
-import Brick from './game/brick.js'
-import Ball from './game/ball.js'
-import Score from './game/score.js'
-import Lives from '/game/lives.js'
-import Paddle from './game/paddle.js'
+import Brick from './game/brick.js' // eslint-disable-line
+import Ball from './game/ball.js' // eslint-disable-line
+import Score from './game/score.js' // eslint-disable-line
+import Lives from '/game/lives.js' // eslint-disable-line
+import Paddle from './game/paddle.js' // eslint-disable-line
 
 const canvas = document.getElementById('myCanvas');
 const ctx = canvas.getContext('2d');
