@@ -1,35 +1,6 @@
 /* eslint-disable no-alert */
 const canvas = document.getElementById('myCanvas');
 const ctx = canvas.getContext('2d');
-// should use classes?
-// ball definition
-let x = canvas.width / 2;
-let y = canvas.height - 30;
-let dx = 2;
-let dy = -2;
-const ballRadius = 10;
-
-// paddle definition
-const paddleHeight = 10;
-const paddleWidth = 75;
-let paddleX = (canvas.width - paddleWidth) / 2;
-let rightPressed = false;
-let leftPressed = false;
-
-
-
-// other vars
-let score = 0;
-let lives = 3;
-
-// drawing functions
-const bricks = [];
-for (let c = 0; c < brickColumnCount; c += 1) {
-  bricks[c] = [];
-  for (let r = 0; r < brickRowCount; r += 1) {
-    bricks[c][r] = { x: 0, y: 0, status: 1 };
-  }
-}
 
 function collisionDetection() {
   for (let c = 0; c < brickColumnCount; c += 1) {

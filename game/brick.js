@@ -7,6 +7,14 @@ const brickPadding = 10;
 const brickOffsetTop = 30;
 const brickOffsetLeft = 30;
 
+const bricks = [];
+for (let c = 0; c < brickColumnCount; c += 1) {
+  bricks[c] = [];
+  for (let r = 0; r < brickRowCount; r += 1) {
+    bricks[c][r] = { x: 0, y: 0, status: 1 };
+  }
+}
+
 function drawBricks() {
   for (let c = 0; c < brickColumnCount; c += 1) {
     for (let r = 0; r < brickRowCount; r += 1) {
@@ -22,5 +30,14 @@ function drawBricks() {
         ctx.closePath();
       }
     }
+  }
+}
+class Brick(){
+  constructor(){
+    
+  }
+
+  draw(){
+
   }
 }

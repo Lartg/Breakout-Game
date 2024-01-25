@@ -1,3 +1,32 @@
+class Paddle(){
+  constructor(){
+    
+  }
+
+  draw(){
+
+  }
+}
+
+
+
+
+
+
+
+
+
+
+// paddle definition
+const paddleHeight = 10;
+const paddleWidth = 75;
+let paddleX = (canvas.width - paddleWidth) / 2;
+let rightPressed = false;
+let leftPressed = false;
+
+
+
+
 
 function drawPaddle() {
   ctx.beginPath();
