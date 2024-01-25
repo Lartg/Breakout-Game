@@ -1,8 +1,8 @@
 import Sprite from './sprite.js' // eslint-disable-line
 
 class Paddle extends Sprite {
-  constructor(x, height = 10, width = 75, color = '#0095DD') {
-    super(x - (width / 2), 0, width, height, color);
+  constructor(x, y, height = 10, width = 75, color = '#0095DD') {
+    super(x - (width / 2), y - height, width, height, color);
     this.rightPressed = false;
     this.leftPressed = false;
   }

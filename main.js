@@ -10,7 +10,7 @@ const ctx = canvas.getContext('2d');
 const score = new Score();
 const lives = new Lives();
 const ball = new Ball(200, 200, 10);
-const paddle = new Paddle((canvas.width / 2));
+const paddle = new Paddle((canvas.width / 2), canvas.height);
 // generate bricks
 const bricks = [];
 const brickColumnCount = 5;
@@ -26,11 +26,9 @@ function drawBricks() {
     for (let r = 0; r < brickRowCount; r += 1) {
       const b = bricks[c][r];
       if (b.status === true) {
-        const brickX = c * (b.width + b.padding) + b.marginLeft;
-        const brickY = r * (b.height + b.padding) + b.marginTop;
-        b.x = brickX;
-        b.y = brickY;
-        b.render();
+        b.x = c * (b.width + b.padding) + b.marginLeft;
+        b.y = r * (b.height + b.padding) + b.marginTop;
+        b.render(ctx);
       }
     }
   }
@@ -65,12 +63,12 @@ function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   // draw game elements
-  ball.render();
-  paddle.render();
+  ball.render(ctx);
+  paddle.render(ctx);
   brickCollisionDetection();
   drawBricks();
-  score.render();
-  lives.render();
+  score.render(ctx);
+  lives.render(ctx);
 
   // ball collisions
   if (ball.x + ball.dx > canvas.width - ball.radius || ball.x + ball.dx < ball.radius) {
@@ -98,7 +96,7 @@ function draw() {
 
   // apply change
   ball.move();
-  paddle.move();
+  paddle.move(canvas);
   // repeatedly call draw
   requestAnimationFrame(draw);
 }
