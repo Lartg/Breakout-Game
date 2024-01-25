@@ -10,7 +10,7 @@ const ctx = canvas.getContext('2d');
 const score = new Score();
 const lives = new Lives();
 const ball = new Ball(200, 200, 10);
-const paddle = new Paddle();
+const paddle = new Paddle((canvas.width / 2));
 // generate bricks
 const bricks = [];
 const brickColumnCount = 5;
@@ -21,20 +21,22 @@ for (let c = 0; c < brickColumnCount; c += 1) {
     bricks[c][r] = new Brick(0, 0);
   }
 }
-for (let c = 0; c < brickColumnCount; c += 1) {
-  for (let r = 0; r < brickRowCount; r += 1) {
-    const b = bricks[c][r];
-    if (b.status === true) {
-      const brickX = c * (b.width + b.padding) + b.marginLeft;
-      const brickY = r * (b.height + b.padding) + b.marginTop;
-      b.x = brickX;
-      b.y = brickY;
-      b.render();
+function drawBricks() {
+  for (let c = 0; c < brickColumnCount; c += 1) {
+    for (let r = 0; r < brickRowCount; r += 1) {
+      const b = bricks[c][r];
+      if (b.status === true) {
+        const brickX = c * (b.width + b.padding) + b.marginLeft;
+        const brickY = r * (b.height + b.padding) + b.marginTop;
+        b.x = brickX;
+        b.y = brickY;
+        b.render();
+      }
     }
   }
 }
 
-function collisionDetection() {
+function brickCollisionDetection() {
   for (let c = 0; c < brickColumnCount; c += 1) {
     for (let r = 0; r < brickRowCount; r += 1) {
       const b = bricks[c][r];
@@ -46,7 +48,7 @@ function collisionDetection() {
           && ball.y < b.y + b.height
         ) {
           ball.dy = -ball.dy;
-          b.status = 0;
+          b.status = false;
           score.score += 1;
           if (score.score === brickRowCount * brickColumnCount) {
             alert('YOU WIN, CONGRATULATIONS!');
@@ -65,7 +67,7 @@ function draw() {
   // draw game elements
   ball.render();
   drawPaddle();
-  collisionDetection();
+  brickCollisionDetection();
   drawBricks();
   score.render();
   lives.render();
@@ -95,8 +97,7 @@ function draw() {
   }
 
   // apply change
-  ball.x += ball.dx;
-  ball.y += ball.dy;
+  ball.move();
 
   // repeatedly call draw
   requestAnimationFrame(draw);

@@ -1,68 +1,53 @@
 class Paddle {
-  constructor(height, width, x){
-    const paddleHeight = 10;
-    const paddleWidth = 75;
-    let paddleX = (canvas.width - paddleWidth) / 2;
-    let rightPressed = false;
-    let leftPressed = false;
+  constructor(x, height = 10, width = 75) {
+    this.height = height;
+    this.width = width;
+    this.x = x - (width / 2);
+    this.rightPressed = false;
+    this.leftPressed = false;
   }
 
-  move(){ 
+  move(canvas) {
     // paddle movement
-  if (rightPressed) {
-    paddleX += 7;
-    if (paddleX + paddleWidth > canvas.width) {
-      paddleX = canvas.width - paddleWidth;
+    if (this.rightPressed) {
+      this.x += 7;
+      if (this.x + this.width > canvas.width) {
+        this.x = canvas.width - this.width;
+      }
+    } else if (this.leftPressed) {
+      this.x -= 7;
+      if (this.x < 0) {
+        this.x = 0;
+      }
     }
-  } else if (leftPressed) {
-    paddleX -= 7;
-    if (paddleX < 0) {
-      paddleX = 0;
+  }
+
+  keyDownHandler(e) {
+    if (e.key === 'Right' || e.key === 'ArrowRight') {
+      this.rightPressed = true;
+    } else if (e.key === 'Left' || e.key === 'ArrowLeft') {
+      this.leftPressed = true;
     }
   }
+
+  keyUpHandler(e) {
+    if (e.key === 'Right' || e.key === 'ArrowRight') {
+      this.rightPressed = false;
+    } else if (e.key === 'Left' || e.key === 'ArrowLeft') {
+      this.leftPressed = false;
+    }
+  }
+
+  mouseMoveHandler(e, canvas) {
+    const relativeX = e.clientX - canvas.offsetLeft;
+    if (relativeX > 0 && relativeX < canvas.width) {
+      this.w = relativeX - this.width / 2;
+    }
   }
 }
 
-export default Paddle
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function keyDownHandler(e) {
-  if (e.key === 'Right' || e.key === 'ArrowRight') {
-    rightPressed = true;
-  } else if (e.key === 'Left' || e.key === 'ArrowLeft') {
-    leftPressed = true;
-  }
-}
-
-function keyUpHandler(e) {
-  if (e.key === 'Right' || e.key === 'ArrowRight') {
-    rightPressed = false;
-  } else if (e.key === 'Left' || e.key === 'ArrowLeft') {
-    leftPressed = false;
-  }
-}
-
-function mouseMoveHandler(e) {
-  const relativeX = e.clientX - canvas.offsetLeft;
-  if (relativeX > 0 && relativeX < canvas.width) {
-    paddleX = relativeX - paddleWidth / 2;
-  }
-}
+export default Paddle;
 
 // paddle movement
-document.addEventListener('keydown', keyDownHandler, false);
-document.addEventListener('keyup', keyUpHandler, false);
+// document.addEventListener('keydown', keyDownHandler, false);
+// document.addEventListener('keyup', keyUpHandler, false);
