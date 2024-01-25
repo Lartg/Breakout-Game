@@ -1,19 +1,13 @@
-let lives = 3;
-
-function drawLives() {
-  ctx.font = '16px Arial';
-  ctx.fillStyle = '#0095DD';
-  ctx.fillText(`Lives: ${lives}`, canvas.width - 65, 20);
-}
-
-class Lives(){
-  constructor(){
-    
+class Lives {
+  constructor(lives = 3) {
+    this.lives = lives;
   }
 
-  draw(){
-
+  render(ctx, canvas) {
+    ctx.font = '16px Arial';
+    ctx.fillStyle = '#0095DD';
+    ctx.fillText(`Lives: ${this.lives}`, canvas.width - 65, 20);
   }
 }
 
-export default Lives
+export default Lives;

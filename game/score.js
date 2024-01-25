@@ -3,7 +3,7 @@ class Score {
     this.score = score;
   }
 
-  draw(ctx) {
+  render(ctx) {
     ctx.font = '16px Arial';
     ctx.fillStyle = '#0095DD';
     ctx.fillText(`Score: ${this.score}`, 8, 20);

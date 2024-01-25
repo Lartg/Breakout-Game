@@ -1,4 +1,4 @@
-class Paddle(){
+class Paddle {
   constructor(height, width, x){
     const paddleHeight = 10;
     const paddleWidth = 75;
@@ -7,12 +7,7 @@ class Paddle(){
     let leftPressed = false;
   }
 
-  draw(ctx){
-    ctx.beginPath();
-    ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
-    ctx.fillStyle = '#0095DD';
-    ctx.fill();
-    ctx.closePath();
+  move(){ 
     // paddle movement
   if (rightPressed) {
     paddleX += 7;

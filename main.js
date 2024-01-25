@@ -1,6 +1,40 @@
 /* eslint-disable no-alert */
+import Brick from '/game/brick.js'
+import Ball from '/game/ball.js'
+
 const canvas = document.getElementById('myCanvas');
 const ctx = canvas.getContext('2d');
+
+
+const ball = new Ball(200, 200, 10);
+
+
+
+
+
+
+const bricks = [];
+for (let c = 0; c < brickColumnCount; c += 1) {
+  bricks[c] = [];
+  for (let r = 0; r < brickRowCount; r += 1) {
+    bricks[c][r] = new Brick(0, 0);
+  }
+}
+for (let c = 0; c < brickColumnCount; c += 1) {
+  for (let r = 0; r < brickRowCount; r += 1) {
+    if (bricks[c][r].status === 1) {
+      const brickX = c * (brickWidth + brickPadding) + brickOffsetLeft;
+      const brickY = r * (brickHeight + brickPadding) + brickOffsetTop;
+      bricks[c][r].x = brickX;
+      bricks[c][r].y = brickY;
+      ctx.beginPath();
+      ctx.rect(brickX, brickY, brickWidth, brickHeight);
+      ctx.fillStyle = '#0095DD';
+      ctx.fill();
+      ctx.closePath();
+    }
+  }
+}
 
 function collisionDetection() {
   for (let c = 0; c < brickColumnCount; c += 1) {
@@ -38,7 +72,11 @@ function draw() {
   drawScore();
   drawLives();
 
+
+
+
   // ball collisions
+  
   if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
     dx = -dx;
   }
