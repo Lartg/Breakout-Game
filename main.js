@@ -2,7 +2,7 @@
 import Brick from './game/brick.js' // eslint-disable-line
 import Ball from './game/ball.js' // eslint-disable-line
 import Score from './game/score.js' // eslint-disable-line
-import Lives from '/game/lives.js' // eslint-disable-line
+import Lives from './game/lives.js' // eslint-disable-line
 import Paddle from './game/paddle.js' // eslint-disable-line
 
 const canvas = document.getElementById('myCanvas');
@@ -11,6 +11,7 @@ const score = new Score();
 const lives = new Lives();
 const ball = new Ball(200, 200, 10);
 const paddle = new Paddle((canvas.width / 2), canvas.height);
+
 // generate bricks
 const bricks = [];
 const brickColumnCount = 5;
@@ -21,6 +22,7 @@ for (let c = 0; c < brickColumnCount; c += 1) {
     bricks[c][r] = new Brick(0, 0);
   }
 }
+
 function drawBricks() {
   for (let c = 0; c < brickColumnCount; c += 1) {
     for (let r = 0; r < brickRowCount; r += 1) {
@@ -68,7 +70,7 @@ function draw() {
   brickCollisionDetection();
   drawBricks();
   score.render(ctx);
-  lives.render(ctx);
+  lives.render(ctx, canvas);
 
   // ball collisions
   if (ball.x + ball.dx > canvas.width - ball.radius || ball.x + ball.dx < ball.radius) {
@@ -81,7 +83,7 @@ function draw() {
       ball.dy = -ball.dy;
     } else {
       lives.lives -= 1;
-      if (!lives) {
+      if (lives.lives <= 0) {
         alert('GAME OVER');
         document.location.reload();
       } else {
@@ -129,4 +131,4 @@ function mouseMoveHandler(e) {
 // paddle movement
 document.addEventListener('keydown', keyDownHandler, false);
 document.addEventListener('keyup', keyUpHandler, false);
-document.addEventListener('mouseEvent', mouseMoveHandler, false);
+document.addEventListener('mousemove', mouseMoveHandler, false);

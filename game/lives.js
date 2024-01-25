@@ -6,7 +6,7 @@ class Lives {
   render(ctx, canvas) {
     ctx.font = '16px Arial';
     ctx.fillStyle = '#0095DD';
-    ctx.fillText(`Lives: ${this.lives}`, canvas.width - 65, 20);
+    ctx.fillText(`Lives: ${this.lives}`, canvas.width - 100, 20);
   }
 }
 
