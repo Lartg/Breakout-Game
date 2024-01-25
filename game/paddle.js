@@ -1,13 +1,34 @@
 class Paddle(){
-  constructor(){
-    
+  constructor(height, width, x){
+    const paddleHeight = 10;
+    const paddleWidth = 75;
+    let paddleX = (canvas.width - paddleWidth) / 2;
+    let rightPressed = false;
+    let leftPressed = false;
   }
 
-  draw(){
-
+  draw(ctx){
+    ctx.beginPath();
+    ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
+    ctx.fillStyle = '#0095DD';
+    ctx.fill();
+    ctx.closePath();
+    // paddle movement
+  if (rightPressed) {
+    paddleX += 7;
+    if (paddleX + paddleWidth > canvas.width) {
+      paddleX = canvas.width - paddleWidth;
+    }
+  } else if (leftPressed) {
+    paddleX -= 7;
+    if (paddleX < 0) {
+      paddleX = 0;
+    }
+  }
   }
 }
 
+export default Paddle
 
 
 
@@ -17,24 +38,8 @@ class Paddle(){
 
 
 
-// paddle definition
-const paddleHeight = 10;
-const paddleWidth = 75;
-let paddleX = (canvas.width - paddleWidth) / 2;
-let rightPressed = false;
-let leftPressed = false;
 
 
-
-
-
-function drawPaddle() {
-  ctx.beginPath();
-  ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
-  ctx.fillStyle = '#0095DD';
-  ctx.fill();
-  ctx.closePath();
-}
 
 
 

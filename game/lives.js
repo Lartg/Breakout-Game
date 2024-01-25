@@ -15,3 +15,5 @@ class Lives(){
 
   }
 }
+
+export default Lives

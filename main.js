@@ -62,21 +62,9 @@ function draw() {
     }
   }
 
-  // paddle movement
-  if (rightPressed) {
-    paddleX += 7;
-    if (paddleX + paddleWidth > canvas.width) {
-      paddleX = canvas.width - paddleWidth;
-    }
-  } else if (leftPressed) {
-    paddleX -= 7;
-    if (paddleX < 0) {
-      paddleX = 0;
-    }
-  }
   // apply change
-  x += dx;
-  y += dy;
+  // x += dx;
+  // y += dy;
 
   // repeatedly call draw
   requestAnimationFrame(draw);
