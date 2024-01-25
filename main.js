@@ -1,9 +1,9 @@
 /* eslint-disable no-alert */
-import Brick from '/game/brick.js'
-import Ball from '/game/ball.js'
-import Score from '/game/score.js'
+import Brick from './game/brick.js'
+import Ball from './game/ball.js'
+import Score from './game/score.js'
 import Lives from '/game/lives.js'
-import Paddle from '/game/paddle.js'
+import Paddle from './game/paddle.js'
 
 const canvas = document.getElementById('myCanvas');
 const ctx = canvas.getContext('2d');
@@ -66,7 +66,7 @@ function draw() {
 
   // draw game elements
   ball.render();
-  drawPaddle();
+  paddle.render();
   brickCollisionDetection();
   drawBricks();
   score.render();
@@ -98,9 +98,37 @@ function draw() {
 
   // apply change
   ball.move();
-
+  paddle.move();
   // repeatedly call draw
   requestAnimationFrame(draw);
 }
 
 draw();
+
+function keyDownHandler(e) {
+  if (e.key === 'Right' || e.key === 'ArrowRight') {
+    paddle.rightPressed = true;
+  } else if (e.key === 'Left' || e.key === 'ArrowLeft') {
+    paddle.leftPressed = true;
+  }
+}
+
+function keyUpHandler(e) {
+  if (e.key === 'Right' || e.key === 'ArrowRight') {
+    paddle.rightPressed = false;
+  } else if (e.key === 'Left' || e.key === 'ArrowLeft') {
+    paddle.leftPressed = false;
+  }
+}
+
+function mouseMoveHandler(e) {
+  const relativeX = e.clientX - canvas.offsetLeft;
+  if (relativeX > 0 && relativeX < canvas.width) {
+    paddle.x = relativeX - paddle.width / 2;
+  }
+}
+
+// paddle movement
+document.addEventListener('keydown', keyDownHandler, false);
+document.addEventListener('keyup', keyUpHandler, false);
+document.addEventListener('mouseEvent', mouseMoveHandler, false);
